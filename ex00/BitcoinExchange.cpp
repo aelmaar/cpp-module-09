@@ -6,7 +6,7 @@
 /*   By: ael-maar <ael-maar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:50:36 by ael-maar          #+#    #+#             */
-/*   Updated: 2023/10/28 17:31:22 by ael-maar         ###   ########.fr       */
+/*   Updated: 2023/10/29 16:57:24 by ael-maar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ BitcoinExchange::BitcoinExchange() {
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
-        exit(EXIT_FAILURE);
+        throw;
     }
     
 }
