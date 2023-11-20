@@ -6,7 +6,7 @@
 /*   By: ael-maar <ael-maar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 09:43:47 by ael-maar          #+#    #+#             */
-/*   Updated: 2023/11/18 16:51:04 by ael-maar         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:01:08 by ael-maar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include <utility>
 #include <list>
 #include <algorithm>
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 
 # define INT_MAXLEN 10
 # define SUCCESS 0
@@ -34,8 +37,8 @@ typedef std::list<int> int_list;
 typedef std::list<int>::iterator int_list_it;
 typedef std::list<int_list> int_lists;
 typedef int_lists::iterator int_lists_it;
-
-extern int comparisonCount;
+typedef std::list<std::pair<int_list, int_list> > l_pair;
+typedef std::list<std::pair<int_list, int_list> >::iterator l_pair_it;
 
 /********************/
 /* Prasing argument */
@@ -48,13 +51,19 @@ bool isOnlyDigits(std::string &arg);
 /* Merge Insertion */
 /*******************/
 
-typedef struct MainIndex
+typedef struct MainIndexForVector
 {
     int_vectors temp_mainchain;
     int_vector indexes;
-} MainIndex;
+} MainIndexForVector;
 
-void MergeInsertion(int_vector &originalNums, size_t numsSize, size_t pairsLen);
-int_vector JacobsthalSequence(int pendLen);
-int jacobsthal(int n);
+typedef struct MainIndexForList
+{
+    int_lists temp_mainchain;
+    int_list indexes;
+} MainIndexForList;
+
+void MergeInsertionForList(int_list &originalNums, size_t numsSize, size_t pairsLen);
+void MergeInsertionForVector(int_vector &originalNums, size_t numsSize, size_t pairsLen);
+
 #endif
