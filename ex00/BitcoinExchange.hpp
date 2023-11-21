@@ -6,7 +6,7 @@
 /*   By: ael-maar <ael-maar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:37:48 by ael-maar          #+#    #+#             */
-/*   Updated: 2023/10/28 15:07:58 by ael-maar         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:07:57 by ael-maar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ class BitcoinExchange
         std::map<time_t, double> btc_data;
     // private member methods
     private:
-        time_t strToTimestamp(const std::string &dateStr) const;
         bool isValidInputDate(const std::string &input_date) const;
         bool isValidInputValue(const std::string &input_value) const;
         bool parseDate(const std::string &input, int &year, int &month, int &day) const;
@@ -39,6 +38,7 @@ class BitcoinExchange
         bool searchAndCalculate(const std::string &input_date, double value) const;
         m_iterator findClosestDate(time_t &timestampDate) const;
     public:
+        time_t strToTimestamp(const std::string &dateStr) const;
         BitcoinExchange();
         BitcoinExchange(BitcoinExchange const &src);
         BitcoinExchange &operator=(BitcoinExchange const &src);

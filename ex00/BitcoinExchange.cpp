@@ -6,7 +6,7 @@
 /*   By: ael-maar <ael-maar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:50:36 by ael-maar          #+#    #+#             */
-/*   Updated: 2023/10/29 16:57:24 by ael-maar         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:37:38 by ael-maar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ BitcoinExchange::BitcoinExchange() {
         {
             size_t separator = line.find(",");
             btc_data[strToTimestamp(line.substr(0, separator))] = strToDouble(line.substr(separator + 1));
-            // btc_data.insert({ strToTimestamp(line.substr(0, separator)), strToDouble(line.substr(separator + 1)) });
         }
         data_read.close();
     }
@@ -160,33 +159,22 @@ bool BitcoinExchange::valueConstraints(const std::string &input_value, double &v
     return (true);
 }
 
-m_iterator BitcoinExchange::findClosestDate(time_t &timestampDate) const
-{
-    for (m_iterator it = btc_data.begin(); it != btc_data.end(); it++)
-    {
-        if (timestampDate < it->first)
-            return (it);
-    }
-    return (btc_data.end());
-}
-
 bool BitcoinExchange::searchAndCalculate(const std::string &input_date, double value) const
 {
     time_t dateTimestamp = strToTimestamp(input_date);
-    m_iterator it_element = btc_data.find(dateTimestamp);
+    m_iterator it_element = btc_data.lower_bound(dateTimestamp);
 
-    if (it_element != btc_data.end())
+    if (it_element == btc_data.end() || 
+    (it_element->first != dateTimestamp && it_element != btc_data.begin()))
     {
-        std::cout << input_date << "=> " << value << " = " << (value * it_element->second) << std::endl;
-        return (true);
+        it_element--;
     }
-    it_element = findClosestDate(dateTimestamp);
-    if (it_element != btc_data.end())
-    {
-        std::cout << input_date << "=> " << value << " = " << (value * it_element->second) << std::endl;
-        return (true);
-    }
-    return (false);
+    if (dateTimestamp < it_element->first)
+        return (false);
+    std::cout << input_date << "=> " << value << " = " << std::fixed << std::setprecision(2) << (value * it_element->second) << std::endl;
+    std::cout.unsetf(std::ios::fixed);
+    std::cout.precision(6);
+    return (true);
 }
 
 void BitcoinExchange::exchange(const std::string &input_line) const
