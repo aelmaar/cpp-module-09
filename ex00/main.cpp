@@ -6,7 +6,7 @@
 /*   By: ael-maar <ael-maar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 14:37:51 by ael-maar          #+#    #+#             */
-/*   Updated: 2023/10/29 16:58:07 by ael-maar         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:46:55 by ael-maar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int main(int argc, char *argv[])
 {
     try
     {
-        BitcoinExchange btc;
         if (argc != 2)
         {
-            std::cerr << "Error: Invalid argument" << std::endl;
+            std::cerr << "Error: could not open file" << std::endl;
             return (EXIT_FAILURE);
         }
+        BitcoinExchange btc;
         std::ifstream input_read(argv[1]);
         std::string line;
         if (!input_read.is_open())

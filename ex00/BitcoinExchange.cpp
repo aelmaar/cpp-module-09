@@ -6,7 +6,7 @@
 /*   By: ael-maar <ael-maar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:50:36 by ael-maar          #+#    #+#             */
-/*   Updated: 2023/11/21 10:37:38 by ael-maar         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:46:11 by ael-maar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ BitcoinExchange::BitcoinExchange() {
     std::string line;
     try
     {
-        std::ifstream data_read("../cpp_09/data.csv");
+        std::ifstream data_read("./cpp_09/data.csv");
         if (!data_read.is_open())
         {
             std::cerr << "Error: " << strerror(errno) << std::endl;
