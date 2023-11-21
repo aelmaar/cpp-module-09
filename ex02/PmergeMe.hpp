@@ -6,7 +6,7 @@
 /*   By: ael-maar <ael-maar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 09:43:47 by ael-maar          #+#    #+#             */
-/*   Updated: 2023/11/20 13:01:08 by ael-maar         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:23:11 by ael-maar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define INT_MAXLEN 10
 # define SUCCESS 0
 # define FAILURE 1
+
+// ANSI ESCAPE CODES
+# define BOLD "\033[1m"
+# define UNDERLINE "\033[4m"
+# define RED_COLOR "\033[31m"
+# define RESET "\033[0m"
 
 typedef std::vector<int> int_vector;
 typedef int_vector::iterator int_vector_it;
@@ -65,5 +71,27 @@ typedef struct MainIndexForList
 
 void MergeInsertionForList(int_list &originalNums, size_t numsSize, size_t pairsLen);
 void MergeInsertionForVector(int_vector &originalNums, size_t numsSize, size_t pairsLen);
+
+/*******************/
+/*  SOME UTITLITY  */
+/*******************/
+
+template <typename Container>
+void printFormatTime(clock_t &start, clock_t &end, Container &container, std::string const &containerName)
+{
+    double time_taken = (double(end - start) * 1000) / CLOCKS_PER_SEC;
+    std::cout << "Time to process a range of " << container.size() << " elements with " << BOLD << UNDERLINE << containerName << RESET << ": ";
+    std::cout << RED_COLOR << time_taken << RESET << " us" << std::endl;
+}
+
+template <typename Container>
+void    printContainer(Container &container)
+{
+    typename Container::iterator it;
+
+    for (it = container.begin(); it != container.end(); it++)
+        std::cout << *it << " ";
+    std::cout << std::endl;
+}
 
 #endif
